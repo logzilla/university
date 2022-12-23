@@ -1,0 +1,47 @@
+# ------------------------------
+# LogZilla - GeoIP Rule Example
+# http://logzilla.net
+# copyright 2022, LogZilla Corp.
+# ------------------------------
+
+TEST_CASES:
+- event:
+    program: named
+    message: >-
+      infoblox-responses: 05-Nov-2018 13:42:54.339 client
+      11.22.33.44#63094: UDP: query:
+      canvas-iad-prod-c8-1212199460.us-east-1.elb.amazonaws.com IN
+      AAAA response: NOERROR +
+  expect:
+    program: Infoblox
+    message: >-
+      client 11.22.33.44#63094: UDP: query:
+      canvas-iad-prod-c8-1212199460.us-east-1.elb.amazonaws.com
+      IN AAAA response: NOERROR +
+    user_tags:
+      SrcIP: 11.22.33.44
+      Query: canvas-iad-prod-c8-1212199460.us-east-1.elb.amazonaws.com
+      Query Type: AAAA
+      Response: NOERROR
+- event:
+    program: named
+    message: >-
+      infoblox-responses: 05-Nov-2018 13:42:53.779 client
+      11.22.33.44#7376: UDP: query:
+      row-userstats.xboxlive.com.akadns.net IN A response:
+      NOERROR +EDV row-userstats.xboxlive.com.akadns.net. 30
+      IN CNAME userstats.gtm.xboxlive.com.; userstats.gtm.xboxlive.com.
+      30 IN A 170.55.137.169;
+  expect:
+    program: Infoblox
+    message: >-
+      client 11.22.33.44#7376: UDP: query:
+      row-userstats.xboxlive.com.akadns.net IN A response:
+      NOERROR +EDV row-userstats.xboxlive.com.akadns.net. 30
+      IN CNAME userstats.gtm.xboxlive.com.; userstats.gtm.xboxlive.com.
+      30 IN A 170.55.137.169;
+    user_tags:
+      SrcIP: 11.22.33.44
+      Query: row-userstats.xboxlive.com.akadns.net
+      Query Type: A
+      Response: NOERROR
