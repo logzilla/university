@@ -1,0 +1,22 @@
+# ------------------------------
+# LogZilla - GeoIP Rule Example
+# http://logzilla.net
+# copyright 2022, LogZilla Corp.
+# ------------------------------
+
+TEST_CASES:
+- event:
+    program: dhcpd
+    message: >-
+      DHCPACK on 1.120.0.1 to 08:00:27:61:76:cd (VirtualBox) via enp0s3
+  expect:
+    message: >-
+      DHCPACK on 1.120.0.1 to 08:00:27:61:76:cd (VirtualBox) via enp0s3
+    user_tags:
+      SrcIP: 1.120.0.1
+      SrcIP City: Melbourne
+      SrcIP State: Victoria
+      SrcIP Country: Australia
+      SrcIP City 2: Melbourne
+      SrcIP State 2: Victoria
+      SrcIP Country 2: Australia
